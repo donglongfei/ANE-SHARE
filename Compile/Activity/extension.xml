@@ -1,0 +1,13 @@
+	<extension xmlns="http://ns.adobe.com/air/extension/2.5">
+	  <id>com.mark.ActivityANE</id>
+	  <versionNumber>1</versionNumber>
+	  <platforms>
+      <platform name="Android-ARM">
+	        <applicationDeployment>
+	          <nativeLibrary>Activity.jar</nativeLibrary>
+	          <initializer>air.com.adobe.Example.debug.ExampleAirExtension</initializer>
+	          <finalizer>air.com.adobe.Example.debug.ExampleAirExtension</finalizer>
+	        </applicationDeployment>
+	   </platform>
+	  </platforms>
+	</extension>

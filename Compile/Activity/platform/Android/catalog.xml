@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.5.2" build="22243" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="_a88d5aee2d17468592c93be5b5601d74f38c895a02e912195e579b7200ac895a_flash_display_Sprite" mod="1317199121811" signatureChecksum="3080943935" >
+        <def id="_a88d5aee2d17468592c93be5b5601d74f38c895a02e912195e579b7200ac895a_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/mark/nativeExtension/ShareActivity/ShareActivity" mod="1317199121000" signatureChecksum="2001749463" >
+        <def id="com.mark.nativeExtension.ShareActivity:ShareActivity" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="21519bd9d521dffff8b5d805e1438f9d68960eadd609dd8f30ee1cdde6246e16"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

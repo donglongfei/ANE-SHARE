@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="主页视图" left="10" right="10" top="10">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.mark.nativeExtension.ShareActivity.ShareActivity;
+			
+			import spark.events.TextOperationEvent;
+			
+			private var roll:CameraRoll;
+			private var loader:Loader=new Loader();
+			private var shareTypeFlag:int=0; // 0=text, 1=image
+			protected function share(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var shareActivity:ShareActivity=new ShareActivity();
+				var result:String=shareActivity.share(txtMessage.text,shareTypeFlag);
+				trace("RESULT=" + result);
+			}
+			
+			protected function browseCameraRoll(event:MouseEvent):void
+			{
+				txtMessage.text="";
+				// TODO Auto-generated method stub
+				roll = new CameraRoll();
+				if( CameraRoll.supportsBrowseForImage )
+				{
+					roll.addEventListener( MediaEvent.SELECT, imageSelected );
+					roll.addEventListener( Event.CANCEL, imageSelected );
+					
+					roll.browseForImage();
+				}
+				else
+				{
+					trace( "Browsing in camera roll is not supported.");
+				}
+				roll.addEventListener(MediaEvent.SELECT,imageSelected);
+				
+			}
+			
+			private function imageSelected(event:MediaEvent):void{
+				var mp:MediaPromise = event.data;
+				var mediaPath:String;
+				mediaPath =  mp.file.url;
+				txtMessage.text=mediaPath;
+				
+				var imagePromise:MediaPromise = event.data;
+				
+				loader = new Loader();
+				if( imagePromise.isAsync )
+				{
+					loader.contentLoaderInfo.addEventListener( Event.COMPLETE, imageLoaded );
+					loader.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, imageLoadFailed );
+					loader.loadFilePromise( imagePromise );
+				}
+			}
+			
+			private function imageLoaded( event:Event ):void
+			{
+				imgShare.source=loader.content;
+				shareTypeFlag=1;
+			}
+			
+			private function imageLoadFailed( event:Event ):void
+			{
+				trace( "Image load failed." );
+			}
+			
+			protected function setShareType(event:TextOperationEvent):void
+			{
+				shareTypeFlag=0;
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<s:actionContent>
+		<s:Button label="SHARE" click="share(event)"/>
+	</s:actionContent>
+	<s:layout>
+		<s:VerticalLayout gap="10" horizontalAlign="center"/>
+	</s:layout>
+	<s:TextInput id="txtMessage" left="10" right="10" top="10" height="50" change="setShareType(event)" />
+	<s:BitmapImage id="imgShare" scaleMode="letterbox" width="100%"/>
+	<s:Group>
+		<s:Button id="btnImage" label="BROWSE" click="browseCameraRoll(event)"/>
+	</s:Group>
+</s:View>
